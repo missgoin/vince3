@@ -109,7 +109,7 @@ function cloneTC() {
 	fi
 	
     # Clone AnyKernel
-    #git clone --depth=1 https://github.com/missgoin/AnyKernel3.git
+    git clone --depth=1 https://github.com/missgoin/AnyKernel3.git
 
 	}
 
