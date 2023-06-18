@@ -14,13 +14,13 @@ MODEL=Xiaomi
 DEVICE=vince
 
 # Kernel Version Code
-VERSION=
+#VERSION=
 
 # Kernel Defconfig
 DEFCONFIG=${DEVICE}-perf_defconfig
 
 # Select LTO variant ( Full LTO by default )
-DISABLE_LTO=0
+DISABLE_LTO=1
 THIN_LTO=0
 
 # Files
@@ -43,7 +43,7 @@ TANGGAL=$(date +"%F%S")
 # Specify Final Zip Name
 ZIPNAME=SUPER.KERNEL
 FINAL_ZIP=${ZIPNAME}-${DEVICE}-${TANGGAL}.zip
-FINAL_ZIP_ALIAS=Karenulvin-${TANGGAL}.zip
+#FINAL_ZIP_ALIAS=Karenulvin-${TANGGAL}.zip
 
 ##----------------------------------------------------------##
 # Specify compiler.
@@ -193,14 +193,14 @@ START=$(date +"%s")
 	       CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
 	       #LLVM=1 \
 	       #LLVM_IAS=1 \
-	       LD=${LINKER} \
+	       #LD=${LINKER} \
 	       AR=llvm-ar \
-	       NM=llvm-nm \
-	       OBJCOPY=llvm-objcopy \
-	       OBJDUMP=llvm-objdump \
-	       STRIP=llvm-strip \
-	       READELF=llvm-readelf \
-	       OBJSIZE=llvm-size \
+	       #NM=llvm-nm \
+	       #OBJCOPY=llvm-objcopy \
+	       DIS=llvm-dis \
+	       #STRIP=llvm-strip \
+	       #READELF=llvm-readelf \
+	       #OBJSIZE=llvm-size \
 	       V=$VERBOSE 2>&1 | tee error.log
 	elif [ -d ${KERNEL_DIR}/cosmic ];
 	   then
@@ -263,10 +263,10 @@ function zipping() {
 	cd AnyKernel3 || exit 1
         zip -r9 ${FINAL_ZIP_ALIAS} *
         MD5CHECK=$(md5sum "$FINAL_ZIP_ALIAS" | cut -d' ' -f1)
-        echo "Zip: $FINAL_ZIP_ALIAS"
+        echo "Zip: $FINAL_ZIP"
         #curl -T $FINAL_ZIP_ALIAS temp.sh; echo
         #curl -T $FINAL_ZIP_ALIAS https://oshi.at; echo
-        curl --upload-file $FINAL_ZIP_ALIAS https://free.keep.sh; echo
+        curl --upload-file $FINAL_ZIP https://free.keep.sh; echo
     cd ..
 }
     
